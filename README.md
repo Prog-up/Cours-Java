@@ -211,11 +211,11 @@ switch(binaire){ //"binaire" est un entier égal à 0 ou 1
 }
 ```
 
-Dans le cas où il est possible qu'il y ai d'autres solutions, aboutissant toutes sur la même instruction, il faut utiliser `default;` après le dernier `case ... ;` pour avoir un cas où le resultat de l'expression ne correspnd à aucun cas.
+Dans le cas où il est possible qu'il y ait d'autres solutions, aboutissant toutes sur la même instruction, il faut utiliser `default;` après le dernier `case ... ;` pour avoir un cas où le résultat de l'expression ne correspond à aucun cas.
 
 ## 9. Tableaux
 - `<type>[] <nom> = new <type>[<nombre d'éléments>];`
-  - **création** d'un talbleau
+  - **création** d'un tableau
 - `<nom d'un tableau>[<index>] = <valeur>;`
   - **ajout** d'une valeur dans l'index du tableau
 - `<nom d'un tableau>[index];`
@@ -227,8 +227,97 @@ Dans le cas où il est possible qu'il y ai d'autres solutions, aboutissant toute
 - Lors de la création d'un tableau d'entier, **toutes les valeurs sont égales à 0**
 - L'argument de la fonction `main` est un tableau de chaînes de caractères, il est possible de le définir lors de l'exécution du programme en mettant l'argument après le nom du programme avec un espace : `java <nom du dossier>/<nom du programme> <arguments>`
 
+### Matrice
 - `<type>[][] <nom> = new <type>[nombre d'éléments][nombre d'éléments];`
-  - création d'une **matrice** (taleau multidimentionnel)
+  - création d'une **matrice** (tableau multidimensionnel)
 
 ### Attention :
-On ne peut pas moddifier le nombre d'éléments d'un tableau. C'est pourquoi il existe les listes, auquels on peut moddifier le nombre d'éléments : `List<<paramètre de type>> <nom> = new ArrayList <<paramètre de type>>();` (chevrons réels autour des paramètres de type)
+On ne peut pas modifier le nombre d'éléments d'un tableau. C'est pourquoi il existe les listes, auxquels on peut modifier le nombre d'éléments : `List<<Paramètre de type>> <nom> = new ArrayList <<Paramètre de type>>();` (chevrons réels autour des Paramètres de type)
+
+### Paramètre de type
+- `Double` (double)
+- `Boolean` (boolean)
+- `Float` (float)
+- `Integer` (int)
+- `String`
+
+### Manipulations sur une liste
+- `.add(<élément>);`
+  - **ajouter** l'élément à la fin de la liste
+- `.add(<index>,<élément>);`
+  - **ajouter** l'élément à l'index précisé, décalant toutes les valeurs à partir de cet index d'un vers la fin
+- `.set(<index>,<élément>);`
+  - **remplace** la valeur de l'index par le nouvel élément
+- `.remove(<index>);`
+  - **supprime** la valeur de l'index, décalant tous les éléments après l'index d'un vers l'avant
+- `.size();`
+  - **retourner** le nombre d'élément présents dans la liste
+
+### Ensemble
+- `Set<<Paramètre de type>><nom> = new HashSet<<Paramètre de type>>();`
+  - **création** d'un ensemble
+
+### Manipulations sur un ensemble
+- `.add(<élément>);`
+  - **ajouter** un élément (il n'y a pas d'index)
+- `.remove(<élément>);`
+  - **supprimer** l'élément
+- `.size();`
+  - **retourner** le nombre d'éléments présents dans l'ensemble
+
+### Dictionnaires :
+- `Map<<Paramètre de type de clé>,<Paramètre de type de valeur>> <nom> = new HashMap <<Paramètre de type de clé>,<Paramètre de type de valeur>>();`
+  - **création** d'un dictionnaire
+
+### Manipulations sur un dictionnaire
+- `.put(<clé>,<valeur>);`
+  - **ajout** de la clé associée à la valeur dans le dictionnaire
+  - permet aussi de **modifier** une clé déjà existante
+- `.get(<clé>);`
+  - **retourner** la valeur associé à cette clé
+- `.remove(<clé>);`
+  - **supprimer** la clé et la valeur du dictionnaire
+- `.size();`
+  - **retourner** le nombre d'éléments présents dans le dictionnaire
+
+## 10. Débuggage
+
+### Erreurs de **compilation** :
+- erreurs syntaxiques (fautes d'orthographe)
+- erreurs sémantiques (mots interdits / code non interprétable / types incorrects)
+  - ces 2 types d'erreurs sont averties grâce aux IDE (Eclipse)
+
+### Erreurs **d'exécution** :
+- erreurs de logique du code (erreurs de valeur ne provoquant pas de crash)
+- erreurs de logique métier (erreurs provoquant un plantage / crash de l'application)
+
+### Solutions :
+- `try{<code pouvant générer une erreur>}`
+  - s'il y a un problème dans ce code, alors une erreur / exception est générée (**throw**) et est capturée (**catch**)
+- `catch(<exception> e){<code>};`
+  - si l'erreur capturée correspond à l'exception, alors ce code est utilisé
+
+## Attention :
+Si aucune exception capturée ne correspond, alors il y a un crash.
+
+### Exemples d'exception :
+- `NumberFormatException`
+- `ArithmeticException`
+
+## 11. Lambda
+
+Lambda est une **redéfinition** de l'unique **méthode** d'une interface fonctionnelle.
+
+Une **interface fonctionnelle** est une classe n'ayant qu'**une seule méthode** :
+- `public interface <nom>{<variable>};`
+- `(<liste de paramètre>) -> <corps de la fonction>`
+  - lambda
+  - la liste de paramètre correspond aux :
+    - arguments
+    - indication des type (non obligatoire)
+  - le corps de la fonction est entre `{}` s'il n'y a qu'une expression courte
+
+Si il y a une **valeur qui est calculée** dans la méthode lambda, alors celle-ci sera **retournée** (s'il y en a plusieurs, alors c'est la dernière).
+
+### Attention :
+Si **aucune valeur** est calculée dans la méthode lambda, alors la valeur `void` **est retournée**.
